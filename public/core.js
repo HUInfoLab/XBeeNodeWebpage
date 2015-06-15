@@ -22,8 +22,8 @@ function mainController($scope, $http) {
           
           //start d3 parameter initialization 
           var vis = d3.select("#chart"),
-          WIDTH = 1000,          
-          HEIGHT = 500,          
+          WIDTH = 500,          
+          HEIGHT = 250,          
           MARGINS = {
               top: 20,
               right: 20,

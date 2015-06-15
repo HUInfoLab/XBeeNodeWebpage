@@ -45,12 +45,11 @@
 
         <!-- HEADER AND VALUE COUNT -->
         <div class="jumbotron text-center">
-            <h1>Number of Values in DB = <span class="label label-info">{{ myvalues.length }}</span></h1>
+            <h1>Values Collected = <span class="label label-info">{{ myvalues.length }}</span></h1>
         </div>
         <!-- VALUE LIST -->
         <div id="my-table" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <table style="width:80%">
+                <table style="width:50%" align="center">
                     <tr>
                         <th style="text-align:center" >Sensor ID</th>
                         <th style="text-align:center" >Sensor Value</th>		
@@ -61,8 +60,7 @@
                         <td style="text-align:center" > <label> {{ myvalues[$index].SensorVal }} </label> </td>
                     </tr> 
                 </table>
-            </div>
-        </div>
+                </div>
        <p style="text-align:right"><INPUT TYPE="button" onClick="history.go(0)" VALUE="Update Table"></p>
         <form action="graph.html" style="text-align:right">
             <input type="submit" value="Interactive Graph">
