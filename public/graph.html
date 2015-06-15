@@ -1,0 +1,49 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="valueGet">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Sunlight Sensor Table</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #my-table              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+   
+
+    
+    <!-- TABLE STYLING -->
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+    </style>
+</head>
+    
+    
+<!-- SET THE CONTROLLER AND GET ALL VALUES -->
+<body ng-controller="mainController">
+
+<p style="text-align:center"><INPUT TYPE="button" onClick="history.go(0)" VALUE="Update Chart"></p>
+<svg id="chart" width="1000" height="500"></svg>
+
+</body>  
+</html>
