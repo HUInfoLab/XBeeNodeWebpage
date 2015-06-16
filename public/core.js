@@ -59,13 +59,13 @@ function mainController($scope, $http) {
               top: 20,
               right: 20,
               bottom: 20,
-              left: 50
+              left: 60
           },  
           xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis-1)]),
           yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([700,y_axis]), 
               
           xAxis = d3.svg.axis()
-          .scale(xScale),        
+          .scale(xScale),      
           yAxis = d3.svg.axis()
           .scale(yScale)
           .orient("left");

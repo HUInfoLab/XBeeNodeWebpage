@@ -26,6 +26,7 @@ console.log("App listening on port 8080");
 //setup database variables
 var myvalue = mongoose.model('myvalue', { 
     SensorID: String,
+    SensorTime: String,
     SensorVal: Number
 }); 
  
@@ -36,6 +37,7 @@ app.get('/api/myvalues', function(req, res) { //print values to webpage
         res.json(myvalues); // return all myvalues in JSON format
     });
 });    
+
 
 // application -------------------------------------------------------------
 app.get('*', function(req, res) {
