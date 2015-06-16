@@ -11,15 +11,46 @@ function mainController($scope, $http) {
             
           //initiate variables for d3 visualization 
           var z = 0;
-          var chartData = {name:'sensors', children: []};          
+          var count1 = 0;
+          var count2 = 0;
+          var chartData1 = {name:'sensors', children: []};          
+          var chartData2 = {name:'sensors', children: []};
+          var y_axis = 0;
+
+          //add sensor value to the chartData array           
+          while (z < $scope.myvalues.length) { 
+                if ($scope.myvalues[z].SensorID == "1111") {
+                    //use push to place the data after the last entry
+                    chartData1.children.push({'timeStamp': count1, 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
+                    //console.log("The array looks like: " + JSON.stringify(chartData)); //Just some debug checking
+                    count1++; //unique index temporarily replacing timestamp, also allows individual node iteration
+                }
+                else if ($scope.myvalues[z].SensorID == "3333"){
+                    chartData2.children.push({'timeStamp': count2, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
+                    count2++
+                }
+                else {
+                    break;
+                }
+                if ($scope.myvalues[z].SensorVal > y_axis) {
+                    y_axis = $scope.myvalues[z].SensorVal;
+                }
+                z++
+          }
           
-        //add sensor value to the chartData array 
-          while (z < $scope.myvalues.length) {                           
-                chartData.children.push({'timeStamp': z, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); //use push to place the data after the last entry
-               // console.log("The array looks like: " + JSON.stringify(chartData)); //Just some debug checking
-                z++;
-            } 
+          //set x axis range
+          var x_axis = 0;
+          if (count2 > count1) {
+              x_axis = count2;   
+          }
+          else {
+              x_axis = count1;
+          }
           
+          //set y axis range
+          y_axis = y_axis - (y_axis%100) + 100;
+          
+        
           //start d3 parameter initialization 
           var vis = d3.select("#chart"),
           WIDTH = 500,          
@@ -30,8 +61,9 @@ function mainController($scope, $http) {
               bottom: 20,
               left: 50
           },  
-          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,($scope.myvalues.length-1)]), // change to dynamic ranges depending on data         
-          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([100,1000]), // same goes for the yScale         
+          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis-1)]),
+          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,y_axis]), 
+              
           xAxis = d3.svg.axis()
           .scale(xScale),        
           yAxis = d3.svg.axis()
@@ -58,11 +90,19 @@ function mainController($scope, $http) {
           })
           .interpolate("basis");
           
+          //Sensor ID #1
           vis.append('svg:path')
-          .attr('d', lineGen(chartData.children)) //pass your data object into here
-          .attr('stroke', '#5bc0de') //style and color setting
+          .attr('d', lineGen(chartData1.children)) //pass your data object into here
+          .attr('stroke', '#3070ff') //style and color setting
           .attr('stroke-width', 2)
-          .attr('fill', 'none');            
+          .attr('fill', 'none');  
+          //Sensor ID #2
+          vis.append('svg:path')
+          .attr('d', lineGen(chartData2.children)) //pass your data object into here
+          .attr('stroke', 'red') //style and color setting
+          .attr('stroke-width', 2)
+          .attr('fill', 'none');  
+        
         })
     
         .error(function(data) {
