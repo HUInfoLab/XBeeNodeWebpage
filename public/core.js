@@ -25,7 +25,7 @@ function mainController($scope, $http) {
                     //console.log("The array looks like: " + JSON.stringify(chartData)); //Just some debug checking
                     count1++; //unique index temporarily replacing timestamp, also allows individual node iteration
                 }
-                else if ($scope.myvalues[z].SensorID == "3333"){
+                else if ($scope.myvalues[z].SensorID == "2222"){
                     chartData2.children.push({'timeStamp': count2, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
                     count2++
                 }
@@ -62,7 +62,7 @@ function mainController($scope, $http) {
               left: 50
           },  
           xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis-1)]),
-          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,y_axis]), 
+          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([700,y_axis]), 
               
           xAxis = d3.svg.axis()
           .scale(xScale),        

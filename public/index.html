@@ -51,11 +51,13 @@
         <div id="my-table" class="row">
                 <table style="width:50%" align="center">
                     <tr>
+                        <th style="text-align:center" >Sensor Time</th>
                         <th style="text-align:center" >Sensor ID</th>
                         <th style="text-align:center" >Sensor Value</th>		
                     </tr>
                     <tr ng-repeat="myvalue in myvalues">
                     <!-- LOOP OVER THE VALUES IN $scope.myvalues -->
+                        <td style="text-align:center" > <label> {{ myvalues[$index].SensorTime }} </label> </td>
                         <td style="text-align:center" > <label> {{ myvalues[$index].SensorID }} </label> </td>
                         <td style="text-align:center" > <label> {{ myvalues[$index].SensorVal }} </label> </td>
                     </tr> 
