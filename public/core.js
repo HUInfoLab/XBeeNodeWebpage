@@ -49,12 +49,11 @@ function mainController($scope, $http) {
           
           //set y axis range
           y_axis = y_axis - (y_axis%100) + 100;
-          
         
           //start d3 parameter initialization 
           var vis = d3.select("#chart"),
-          WIDTH = 1000,          
-          HEIGHT = 500,          
+          WIDTH = 1200,          
+          HEIGHT = 600,          
           MARGINS = {
               top: 20,
               right: 20,
@@ -101,8 +100,7 @@ function mainController($scope, $http) {
           .attr('d', lineGen(chartData2.children)) //pass your data object into here
           .attr('stroke', 'red') //style and color setting
           .attr('stroke-width', 2)
-          .attr('fill', 'none');  
-        
+          .attr('fill', 'none');        
         })
     
         .error(function(data) {
