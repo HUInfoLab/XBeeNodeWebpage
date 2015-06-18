@@ -21,12 +21,12 @@ function mainController($scope, $http) {
           while (z < $scope.myvalues.length) { 
                 if ($scope.myvalues[z].SensorID == "1111") {
                     //use push to place the data after the last entry
-                    chartData1.children.push({'timeStamp': count1, 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
+                    chartData1.children.push({'timeStamp': (count1/12), 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
                     //console.log("The array looks like: " + JSON.stringify(chartData)); //Just some debug checking
                     count1++; //unique index temporarily replacing timestamp, also allows individual node iteration
                 }
                 else if ($scope.myvalues[z].SensorID == "2222"){
-                    chartData2.children.push({'timeStamp': count2, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
+                    chartData2.children.push({'timeStamp': (count2/12), 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
                     count2++
                 }
                 else {
@@ -41,10 +41,10 @@ function mainController($scope, $http) {
           //set x axis range
           var x_axis = 0;
           if (count2 > count1) {
-              x_axis = count2;   
+              x_axis = (count2/12);   
           }
           else {
-              x_axis = count1;
+              x_axis = (count1/12);
           }
           
           //set y axis range
@@ -53,8 +53,8 @@ function mainController($scope, $http) {
         
           //start d3 parameter initialization 
           var vis = d3.select("#chart"),
-          WIDTH = 500,          
-          HEIGHT = 250,          
+          WIDTH = 1000,          
+          HEIGHT = 500,          
           MARGINS = {
               top: 20,
               right: 20,
