@@ -60,8 +60,8 @@ function mainController($scope, $http) {
               bottom: 20,
               left: 60
           },  
-          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis-1)]),
-          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([700,y_axis]), 
+          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis+(x_axis/10))]),
+          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([500,y_axis]), 
               
           xAxis = d3.svg.axis()
           .scale(xScale),      
