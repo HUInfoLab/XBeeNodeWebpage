@@ -8,7 +8,10 @@ function mainController($scope, $http) {
         .success(function(data) {
           //collect data from the database  
           $scope.myvalues = data;
-            
+         
+          //test out date formats
+          var format = d3.time.format("%X");
+          
           //initiate variables for d3 visualization 
           var z = 0;
           var count1 = 0;
@@ -16,17 +19,18 @@ function mainController($scope, $http) {
           var chartData1 = {name:'sensors', children: []};          
           var chartData2 = {name:'sensors', children: []};
           var y_axis = 0;
-
+          
           //add sensor value to the chartData array           
           while (z < $scope.myvalues.length) { 
                 if ($scope.myvalues[z].SensorID == "1111") {
                     //use push to place the data after the last entry
-                    chartData1.children.push({'timeStamp': count1, 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
+                    chartData1.children.push({'date': format.parse($scope.myvalues[z].SensorTime), 'timeStamp': count1, 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
                     //console.log("The array looks like: " + JSON.stringify(chartData)); //Just some debug checking
                     count1++; //unique index temporarily replacing timestamp, also allows individual node iteration
+                   //console.log("the sensor timestamp is: " +format.parse($scope.myvalues[z].SensorTime));
                 }
                 else if ($scope.myvalues[z].SensorID == "2222"){
-                    chartData2.children.push({'timeStamp': count2, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
+                    chartData2.children.push({'date': format.parse($scope.myvalues[z].SensorTime),'timeStamp': count2, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
                     count2++
                 }
                 else {
@@ -49,23 +53,23 @@ function mainController($scope, $http) {
           
           //set y axis range
           y_axis = y_axis - (y_axis%100) + 100;
-          
+        
         
           //start d3 parameter initialization 
           var vis = d3.select("#chart"),
-          WIDTH = 500,          
-          HEIGHT = 250,          
+          WIDTH = 1000,          
+          HEIGHT = 500,          
           MARGINS = {
               top: 20,
               right: 20,
               bottom: 20,
               left: 60
           },  
-          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis-1)]),
+          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([(new Date(chartData1.children[0].date)), (new Date(chartData1.children[6].date))]),
           yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([700,y_axis]), 
               
           xAxis = d3.svg.axis()
-          .scale(xScale),      
+          .scale(xScale),
           yAxis = d3.svg.axis()
           .scale(yScale)
           .orient("left");
@@ -83,7 +87,7 @@ function mainController($scope, $http) {
           //define function that draws the lines from data passed to it setting the x and y variables
           var lineGen = d3.svg.line()
           .x(function(d) {
-            return xScale(d.timeStamp); //currently just index in the database TO-DO change to a real time stamp
+            return xScale(d.date); //currently just index in the database TO-DO change to a real time stamp
           })
           .y(function(d) {
             return yScale(d.value);
