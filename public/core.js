@@ -61,7 +61,7 @@ function mainController($scope, $http) {
               left: 60
           },  
           xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis+(x_axis/10))]),
-          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([500,y_axis]), 
+          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,y_axis]), 
               
           xAxis = d3.svg.axis()
           .scale(xScale),      
