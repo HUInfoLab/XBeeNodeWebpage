@@ -86,8 +86,12 @@ function mainController($scope, $http) {
           yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([700,y_axis]), 
 =======
           xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis+(x_axis/10))]),
+<<<<<<< HEAD
           yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([500,y_axis]), 
 >>>>>>> 666eceec6b960f3417df5b88aa01be1ac266589e
+=======
+          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,y_axis]), 
+>>>>>>> f56bbf253de7d92823c031b7b90b9e929e61ea46
               
           xAxis = d3.svg.axis()
           .scale(xScale),
