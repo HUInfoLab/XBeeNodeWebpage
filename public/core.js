@@ -24,13 +24,21 @@ function mainController($scope, $http) {
           while (z < $scope.myvalues.length) { 
                 if ($scope.myvalues[z].SensorID == "1111") {
                     //use push to place the data after the last entry
+<<<<<<< HEAD
                     chartData1.children.push({'date': format.parse($scope.myvalues[z].SensorTime), 'timeStamp': count1, 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
+=======
+                    chartData1.children.push({'timeStamp': (count1/12), 'value':JSON.stringify($scope.myvalues[z].SensorVal)});   
+>>>>>>> 666eceec6b960f3417df5b88aa01be1ac266589e
                     //console.log("The array looks like: " + JSON.stringify(chartData)); //Just some debug checking
                     count1++; //unique index temporarily replacing timestamp, also allows individual node iteration
                    //console.log("the sensor timestamp is: " +format.parse($scope.myvalues[z].SensorTime));
                 }
                 else if ($scope.myvalues[z].SensorID == "2222"){
+<<<<<<< HEAD
                     chartData2.children.push({'date': format.parse($scope.myvalues[z].SensorTime),'timeStamp': count2, 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
+=======
+                    chartData2.children.push({'timeStamp': (count2/12), 'value':JSON.stringify($scope.myvalues[z].SensorVal)}); 
+>>>>>>> 666eceec6b960f3417df5b88aa01be1ac266589e
                     count2++
                 }
                 else {
@@ -45,28 +53,41 @@ function mainController($scope, $http) {
           //set x axis range
           var x_axis = 0;
           if (count2 > count1) {
-              x_axis = count2;   
+              x_axis = (count2/12);   
           }
           else {
-              x_axis = count1;
+              x_axis = (count1/12);
           }
           
           //set y axis range
           y_axis = y_axis - (y_axis%100) + 100;
+<<<<<<< HEAD
         
         
           //start d3 parameter initialization 
           var vis = d3.select("#chart"),
           WIDTH = 1000,          
           HEIGHT = 500,          
+=======
+        
+          //start d3 parameter initialization 
+          var vis = d3.select("#chart"),
+          WIDTH = 1200,          
+          HEIGHT = 600,          
+>>>>>>> 666eceec6b960f3417df5b88aa01be1ac266589e
           MARGINS = {
               top: 20,
               right: 20,
               bottom: 20,
               left: 60
           },  
+<<<<<<< HEAD
           xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([(new Date(chartData1.children[0].date)), (new Date(chartData1.children[6].date))]),
           yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([700,y_axis]), 
+=======
+          xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,(x_axis+(x_axis/10))]),
+          yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([500,y_axis]), 
+>>>>>>> 666eceec6b960f3417df5b88aa01be1ac266589e
               
           xAxis = d3.svg.axis()
           .scale(xScale),
@@ -105,8 +126,7 @@ function mainController($scope, $http) {
           .attr('d', lineGen(chartData2.children)) //pass your data object into here
           .attr('stroke', 'red') //style and color setting
           .attr('stroke-width', 2)
-          .attr('fill', 'none');  
-        
+          .attr('fill', 'none');        
         })
     
         .error(function(data) {
